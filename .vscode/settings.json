@@ -1,0 +1,19 @@
+{
+    "mocha.requires": [ 
+        "babel-register" 
+    ],
+    "mocha.files.glob": "./specs/**/*.spec.js",
+    "mocha.parallelTests": 5,
+    "mocha.sideBarOptions": {
+        "lens": true,
+        "decoration": true,
+        "autoUpdateTime": 2000,
+        "showDebugTestStatus": true
+    },
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "None",
+    "appService.deploySubpath": "build",
+}

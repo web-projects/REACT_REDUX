@@ -1,0 +1,115 @@
+html {
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+body {
+    margin-bottom: 0;
+}
+
+/* Sphere Branding Colors */
+.sphere-branding-green {
+    color: rgb(146, 212, 0);
+}
+
+.sphere-branding-blue {
+    color: rgb(0, 37, 154);
+}
+
+.side-nav a {
+    color: white;
+}
+
+.side-nav a span {
+    padding-left: 0px;
+    transition: 0.3s;
+}
+
+.side-nav li:hover a span {
+    padding-left: 15px;
+    transition: 0.3s;
+}
+
+#globalSidebarLinks {
+    border-top: 1px solid white;
+}
+
+.fa-bars {
+    font-size: 1.4rem;
+}
+
+.double-nav a.button-collapse {
+    color: #8bc34a !important
+}
+
+.dropdown.notifications-nav .dropdown-menu {
+    min-width: 19rem;
+}
+
+.login-main-content {
+    margin-top: 18%;
+    line-height: 25px;
+}
+
+.login-main-content-green {
+    margin-top: 35%;
+}
+
+.login-header {
+    color: #444;
+    border-bottom: 2px solid #95C93D;
+}
+
+.loginSphereLogo {
+    max-width: 150px;
+    width: 100%;
+}
+
+.btn-min-150 {
+    min-width: 165px;
+}
+
+#loginEmailContainer,
+#loginPasswordContainer {
+    width: 100%;
+}
+
+#loginForm {
+    overflow: hidden;
+}
+
+#loginPasswordContainer {
+    margin-right: -100%;
+}
+
+#loginSphere {
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    #forgotPasswordBanner {
+        display:block !important;
+    }
+
+    .login-main-content {
+        margin-top: 0;
+    }
+    
+    .login-main-content-green {
+        margin-top: 0;
+    }
+
+    #loginSphere {
+        height: auto !important;
+    }
+}
+
+#forgotPasswordBanner {
+    display:none;
+}
+
+/* Progress Loader Component */
+.progress-loader-component {
+    height: auto;
+}
