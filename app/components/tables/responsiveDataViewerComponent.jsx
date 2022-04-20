@@ -79,7 +79,7 @@ export default class ResponsiveDataViewerComponent extends ResponsiveBaseCompone
                         // const element = this.fieldTypes.get(columnHeaders[j].key);
                         // console.log(element);
                         // columnValue = this.buildCustomFieldType(element.callback, columnValue);
-                        columnValue = this.buildCustomFieldType(this.fieldTypes.get(columnHeaders[j].key), columnValue);
+                        columnValue = this.buildCustomFieldType(this.fieldTypes.get(columnHeaders[j].key).callback, columnValue);
                     }
                 }
                 columnDataArray.push((
