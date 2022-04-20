@@ -73,7 +73,13 @@ export default class ResponsiveDataViewerComponent extends ResponsiveBaseCompone
                     columnValue = this.props.data[idx][[columnHeaders[j].key]].toString();
 
                     if (this.fieldTypes.has(columnHeaders[j].key)) {
-                        columnValue = this.buildCustomFieldType(this.fieldTypes.get(columnHeaders[j]).callback, columnValue);
+                        // console.log(`index = ${j}`);
+                        // console.log(`key= ${columnHeaders[j].key}`);
+                        // console.log(`value= ${columnValue}`);
+                        // const element = this.fieldTypes.get(columnHeaders[j].key);
+                        // console.log(element);
+                        // columnValue = this.buildCustomFieldType(element.callback, columnValue);
+                        columnValue = this.buildCustomFieldType(this.fieldTypes.get(columnHeaders[j].key), columnValue);
                     }
                 }
                 columnDataArray.push((

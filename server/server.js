@@ -91,7 +91,7 @@ app.use((req, res, next) => {
 // Additional routers should all be defined here.
 // ------------------------------------------------------------------
 app.use('/api/devices', deviceApiRouter);
-//app.use('/api', mockApiRouter);
+// app.use('/api', mockApiRouter);
 // app.use('/auth', authRouter);
 // app.use('/data', dataRouter);
 
@@ -145,6 +145,10 @@ app.get('/logout', (req, res) => {
     renderPage(req, res, grip.getLogoutInfo());
 });
 */
+
+app.get('/devices', (req, res) => {
+    renderPage(req, res, grip.getDevicesInfo());
+});
 
 /**
  * Note:
