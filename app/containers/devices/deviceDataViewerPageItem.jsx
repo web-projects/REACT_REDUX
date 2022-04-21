@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import * as _ from 'underscore';
-import ResponsiveDataViewerComponent from '../../components/tables/responsiveDataViewerComponent.jsx';
 import ActionCreator from '../../actions/actionCreator';
-
-function onXrefLinkShow(id) {
-    console.log(`XREF Callback = ${id}`);
-}
+import EventSinkManager from '../../eventSink/eventSinkManager';
+import * as EventCodes from '../../eventSinkCodes';
+import EventArgs from '../../eventSink/eventArgs';
+import ResponsiveDataViewerComponent from '../../components/tables/responsiveDataViewerComponent.jsx';
+import DeviceAppDataDetailsWindow from '../../components/popupWindow/deviceAppDataDetailsWindow.jsx';
 
 export default class DeviceDataViewerPageItem extends Component {
     constructor(props) {
@@ -60,7 +60,7 @@ export default class DeviceDataViewerPageItem extends Component {
         });
         headerColumns.push({
             name: 'XRef',
-            key: 'AppID',
+            key: 'DeviceID',
         });
         headerColumns.push({
             name: 'Tags',
@@ -68,9 +68,9 @@ export default class DeviceDataViewerPageItem extends Component {
         });
 
         const fieldTypesMap = new Map();
-        fieldTypesMap.set('AppID', {
+        fieldTypesMap.set('DeviceID', {
             type: 'link',
-            callback: (id) => onXrefLinkShow(id),
+            callback: (id) => this.onXrefLinkShow(id),
         });
 
         return (
@@ -82,7 +82,12 @@ export default class DeviceDataViewerPageItem extends Component {
                     headerColumns={headerColumns}
                     defaultSortField="creationDate"
                     fieldTypes={fieldTypesMap} />
+                <DeviceAppDataDetailsWindow title="Extended Details" />
           </section>
         );
+    }
+
+    onXrefLinkShow(id) {
+         global.eventSinkManager.postMessage(new EventArgs(EventCodes.EVT_DEVICE_DATA_DISPLAY_APP_DETAILS, id));
     }
 }

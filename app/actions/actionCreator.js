@@ -48,4 +48,20 @@ export default class ActionCreator {
                 });
         };
     }
+
+    getExtendedDeviceData(deviceId) {
+        const options = {
+            method: 'GET',
+            header: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+        };
+
+        const targetUri = `/api/devices/get-extended-device-data/${deviceId}`;
+
+        return this.httpDispatcher.processRequest(targetUri, options)
+            .then((json) => json)
+            .catch((err) => null);
+    }
 }

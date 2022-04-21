@@ -114,9 +114,11 @@ export default class ResponsiveDataViewerComponent extends ResponsiveBaseCompone
     buildCustomFieldType(callbackFn, columnValue) {
         // ToDo: assume this is a link
         return (
-            <a onClick={() => {
-                callbackFn(columnValue);
-            }} href="javascript:void(0)">Click Here</a>
+          <button type="button" id="btnId" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onClick={() => {
+            callbackFn(columnValue);
+            }} href="javascript:void(0)">
+            Details
+          </button>
         );
     }
 }
