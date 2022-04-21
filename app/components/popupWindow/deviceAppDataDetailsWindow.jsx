@@ -14,6 +14,7 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
             isLoaded: false,
             isError: false,
         };
+        this.dispatchPtr = null;
         this.actionCreator = new ActionCreator();
         this.modalDeviceDetailsId = 'modalDeviceDetailsId';
     }
@@ -24,7 +25,8 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
 
     componentDidMount() {
         global.eventSinkManager.subscribe(this.getKey(), this);
-
+        this.dispatchPtr = this.props.dispatch;
+        this.actionCreator.getDeviceDetails(this.currentDeviceId)(this.dispatchPtr);
         jQuery(() => {
             $(`#${this.modalDeviceDetailsId}`).on('show.bs.modal', function (e) {
             });
@@ -50,12 +52,13 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
                     </button>
                   </div>
                   <div class="modal-body">
-                    <ProgressLoader 
+                    <ProgressLoader
                         isLoading={this.state.isLoading} 
                         isError={this.state.isError} />
                     {/* { Device Details -> other devices used by that user or appid }
                     { App Table Details (from the clicked record) -> View Extended User Details }
                     { Last App RollCall -> View Similar Records } */}
+                    <p>HERE!</p>
                   </div>
                   <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

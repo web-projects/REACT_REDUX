@@ -62,7 +62,22 @@ export default class DeviceDataService {
                         },
                     ],
                 },
-                );
+            );
+        });
+    }
+
+    getDeviceDetails(opts) {
+        return new Promise((resolve, reject) => {
+            resolve(
+            {
+                    data: [
+                        {
+                            Extra1: '1',
+                            Extra2: '11',
+                        },
+                    ],
+            },
+            );
         });
     }
 }

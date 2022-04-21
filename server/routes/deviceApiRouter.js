@@ -25,4 +25,20 @@ router.get('/get-all-devices', (req, res) => {
     });
 });
 
+// List the devices
+router.get('/get-device-details', (req, res) => {
+    // Get data service provider
+    const serviceProvider = new DataServiceProvider();
+
+    // get data service
+    const service = serviceProvider.getDeviceDataService();
+
+    // execute data service to return the data
+    return service.getDeviceDetails(null).then((result) => {
+        res.send(result.data);
+    }).catch((err) => {
+        res.status(500).send(err.message);
+    });
+});
+
 module.exports = router;

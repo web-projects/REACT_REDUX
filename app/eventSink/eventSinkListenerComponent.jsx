@@ -5,10 +5,6 @@ export default class EventSinkListenerComponent extends React.Component {
         super(props);
     }
 
-    render() {
-        /* virtual */
-    }
-
     onEventProcedure(e) {
         /* virtual */
     }
@@ -19,5 +15,12 @@ export default class EventSinkListenerComponent extends React.Component {
 
     getKey() {
         return null;
+    }
+
+    render() {
+        /* virtual */
+        return (
+          <p>HERE!</p>
+        );
     }
 }

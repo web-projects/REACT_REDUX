@@ -26,6 +26,7 @@ export default class GlobalSidebar extends React.Component {
             <ul id="globalSidebarLinks" className="mt-2 pt-2 custom-scrollbar">
               <GlobalSidebarLink name="Home" URL="/" iconName="fa-chart-bar" />
               <GlobalSidebarLink name="All Devices" URL="/api/devices/get-all-devices" iconName="fa-star" />
+              <GlobalSidebarLink name="All Devices" URL="/api/devices/get-device-details" iconName="fa-star" />
               <GlobalSidebarLink name="Activity Monitor" URL="#" iconName="fa-star" />
               <GlobalSidebarLink name="Splunk Analyzer" URL="#" iconName="fa-star" />
               <GlobalSidebarLink name="Azure Analyzer" URL="#" iconName="fa-list" />

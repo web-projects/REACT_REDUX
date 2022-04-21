@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as _ from 'underscore';
 import ActionCreator from '../../actions/actionCreator';
 import EventSinkManager from '../../eventSink/eventSinkManager';
@@ -7,7 +7,7 @@ import EventArgs from '../../eventSink/eventArgs';
 import ResponsiveDataViewerComponent from '../../components/tables/responsiveDataViewerComponent.jsx';
 import DeviceAppDataDetailsWindow from '../../components/popupWindow/deviceAppDataDetailsWindow.jsx';
 
-export default class DeviceDataViewerPageItem extends Component {
+export default class DeviceDataViewerPageItem extends React.Component {
     constructor(props) {
         super(props);
         this.dispatchPtr = null;
