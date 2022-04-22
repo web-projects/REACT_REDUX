@@ -23,6 +23,9 @@ export default class SqlQueryBuilder {
         }
 
         output = this.replaceParameters(output);
+
+        this.playback = ['start'];
+
         return output;
     }
 
@@ -88,6 +91,8 @@ export default class SqlQueryBuilder {
                 throw Error(`Unable to find parameter ${paramName}!`);
             }
         }
+
+        this.parameters = [];
 
         return output;
     }

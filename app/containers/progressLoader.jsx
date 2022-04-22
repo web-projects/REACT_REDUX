@@ -11,9 +11,9 @@ export default class ProgressLoader extends React.Component {
             element = (
                 <div className="container center-all">
                     <div className="row justify-content-center">
-                        <div className="col-4">
+                        <div className="col">
                             <div className="progress">
-                                <div className="intermediate"></div>
+                                <div className="indeterminate"></div>
                             </div>
                         </div>
                     </div>

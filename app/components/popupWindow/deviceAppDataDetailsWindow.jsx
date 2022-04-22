@@ -14,7 +14,6 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
             isLoaded: false,
             isError: false,
         };
-        this.dispatchPtr = null;
         this.actionCreator = new ActionCreator();
         this.modalDeviceDetailsId = 'modalDeviceDetailsId';
     }
@@ -25,8 +24,7 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
 
     componentDidMount() {
         global.eventSinkManager.subscribe(this.getKey(), this);
-        this.dispatchPtr = this.props.dispatch;
-        this.actionCreator.getDeviceDetails(this.currentDeviceId)(this.dispatchPtr);
+
         jQuery(() => {
             $(`#${this.modalDeviceDetailsId}`).on('show.bs.modal', function (e) {
             });
@@ -38,30 +36,59 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
     }
 
     render() {
+        let bodyContent = null;
+
+        if (this.state.isLoading) {
+            bodyContent = (
+                <ProgressLoader 
+                    isLoading={this.state.isLoading} 
+                    isError={this.state.isError} />
+            );
+        } else if (this.state.isError) {
+            bodyContent = (
+                <div className="container" style={{height: '100%'}}>
+                    <div className="d-flex align-items-center justify-content-center">
+                        <h1 style={{fontSize: 'large', fontWeight: 'bold'}}>
+                            There was a problem loading the data :'(
+                        </h1>
+                    </div>
+                </div>
+            );
+        } else if (this.state.data !== null) {
+            bodyContent = (
+              <div className="container">
+                <ul className="list-group">
+                  <li className="list-group-item">VosAppM={this.state.data[0].VosAppM}</li>
+                  <li className="list-group-item">VosSRED={this.state.data[0].VosSRED}</li>
+                  <li className="list-group-item">VosVFOP={this.state.data[0].VosVFOP}</li>
+                  <li className="list-group-item">VosVault={this.state.data[0].VosVault}</li>
+                </ul>
+              </div>
+            );
+        } else {
+            bodyContent = (
+                <div className="container">
+                    <p>NOTHING!</p>
+                </div>
+            );
+        }
+
         return (
             /* <!-- Full Height Modal Right --> */
-            <div class="modal fade right" id={this.modalDeviceDetailsId} tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-              aria-hidden="true">
-            
-              <div class="modal-dialog modal-full-height modal-right" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title w-100" id="myModalLabel">${this.props.title}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div className="modal fade right" id={this.modalDeviceDetailsId} tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+              <div className="modal-dialog modal-full-height modal-right" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h4 className="modal-title w-100" id="myModalLabel">{this.props.title}</h4>
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
-                    <ProgressLoader
-                        isLoading={this.state.isLoading} 
-                        isError={this.state.isError} />
-                    {/* { Device Details -> other devices used by that user or appid }
-                    { App Table Details (from the clicked record) -> View Extended User Details }
-                    { Last App RollCall -> View Similar Records } */}
-                    <p>HERE!</p>
+                  <div className="modal-body">
+                    {bodyContent}
                   </div>
-                  <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <div className="modal-footer justify-content-center">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
@@ -69,14 +96,24 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
         );
     }
 
-    refreshModalPane(id) {
-        this.currentDeviceId = id;
-        this.actionCreator.getAppData(id)
+    refreshModalPane(deviceId) {
+        this.actionCreator.getExtendedDeviceData(deviceId)
             .then((result) => {
                 console.dir(result);
+                this.setState({
+                    isError: false,
+                    isLoading: false,
+                    isLoaded: true,
+                    data: result,
+                });
             })
             .catch((err) => {
-                console.dir(err);
+                this.setState({
+                    isError: true,
+                    isLoading: false,
+                    isLoaded: false,
+                    data: err,
+                });
             });
     }
 
@@ -95,6 +132,7 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
                   isLoaded: false,
                   currentDeviceId: e.eventObject,
               });
+              this.refreshModalPane(e.eventObject);
                 break;
             default:
                 break;

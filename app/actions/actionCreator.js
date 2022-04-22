@@ -61,36 +61,7 @@ export default class ActionCreator {
         const targetUri = `/api/devices/get-extended-device-data/${deviceId}`;
 
         return this.httpDispatcher.processRequest(targetUri, options)
-            .then((json) => json)
-            .catch((err) => null);
-    }
-
-    getDeviceDetails(deviceId) {
-        const options = {
-            method: 'GET',
-            header: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'same-origin',
-        };
-
-        // const targetUri = `/api/devices/get-device-details/${deviceId}`;
-        const targetUri = '/api/devices/get-device-details';
-
-        // return this.httpDispatcher.processRequest(targetUri, options)
-        //    .then((json) => json)
-        //    .catch((err) => null);
-
-        const self = this;
-
-        return (dispatch) => {
-            dispatch(self.startedDeviceDataViewerRequest());
-            return self.httpDispatcher.processRequest(targetUri, options)
-                .then((json) => {
-                    dispatch(self.completedDeviceDataViewerRequest(json));
-                }).catch((err) => {
-                    dispatch(self.requestError(err));
-                });
-        };
+            .then((json) => {console.dir(json); return json; })
+            .catch((err) => console.log(err));
     }
 }

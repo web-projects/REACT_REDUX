@@ -9,6 +9,6 @@ export default class DataServiceProvider {
     }
 
     getDeviceDataService() {
-       return new DeviceDataService(this.connectionWorkerProvider.getConnectionWorker(_.IPAv5DbType), new SqlQueryBuilder());
+        return new DeviceDataService(this.connectionWorkerProvider, _.IPAv5DbType, new SqlQueryBuilder());
     }
 }
