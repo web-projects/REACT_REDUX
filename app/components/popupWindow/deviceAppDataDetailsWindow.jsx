@@ -40,19 +40,20 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
 
         if (this.state.isLoading) {
             bodyContent = (
-                <ProgressLoader 
-                    isLoading={this.state.isLoading} 
-                    isError={this.state.isError} />
+              <ProgressLoader
+                isLoading={this.state.isLoading}
+                isError={this.state.isError}
+              />
             );
         } else if (this.state.isError) {
             bodyContent = (
-                <div className="container" style={{height: '100%'}}>
-                    <div className="d-flex align-items-center justify-content-center">
-                        <h1 style={{fontSize: 'large', fontWeight: 'bold'}}>
-                            There was a problem loading the data :'(
-                        </h1>
-                    </div>
+              <div className="container" style={{ height: '100%' }}>
+                <div className="d-flex align-items-center justify-content-center">
+                  <h1 style={{ fontSize: 'large', fontWeight: 'bold' }}>
+                    There was a problem loading the data &apos;(
+                  </h1>
                 </div>
+              </div>
             );
         } else if (this.state.data !== null) {
             bodyContent = (
@@ -67,39 +68,38 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
             );
         } else {
             bodyContent = (
-                <div className="container">
-                    <p>NOTHING!</p>
-                </div>
+              <div className="container">
+                <p>NOTHING!</p>
+              </div>
             );
         }
 
         return (
             /* <!-- Full Height Modal Right --> */
-            <div className="modal fade right" id={this.modalDeviceDetailsId} tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
-              <div className="modal-dialog modal-full-height modal-right" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h4 className="modal-title w-100" id="myModalLabel">{this.props.title}</h4>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    {bodyContent}
-                  </div>
-                  <div className="modal-footer justify-content-center">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
+          <div className="modal fade right" id={this.modalDeviceDetailsId} tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-full-height modal-right" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title w-100" id="myModalLabel">{this.props.title}</h4>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  {bodyContent}
+                </div>
+                <div className="modal-footer justify-content-center">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
+          </div>
         );
     }
 
     refreshModalPane(deviceId) {
         this.actionCreator.getExtendedDeviceData(deviceId)
             .then((result) => {
-                console.dir(result);
                 this.setState({
                     isError: false,
                     isLoading: false,
