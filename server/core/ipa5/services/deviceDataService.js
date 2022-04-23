@@ -137,16 +137,28 @@ export default class DeviceDataService {
 
             resolve(
                 {
-                    data: [
-                        {
-                            VosAppM: '1',
-                            VosSRED: '2',
-                            VosVFOP: '3',
-                            VosVault: '4',
-                        },
-                    ],
+                    data: {
+                      appData: {
+                        AppID: 'app-id',
+                        CompanyID: 'company-id',
+                        AppTypeID: 'app-type-id',
+                        RollCallOn: 'roll-call-on',
+                      },
+                      appRollCall: {
+                        AppRollCallID: 'app-roll-call-id',
+                        CompanyID: 'company-id',
+                        AppID: 'app-id',
+                        Username: 'user-name',
+                      },
+                      deviceData: {
+                        VosAppM: 'vos-appm',
+                        VosSRED: 'vos-sred',
+                        VosVFOP: 'vos-vfop',
+                        VosVault: 'vos-vault',
+                      },
+                    },
                 },
-                );
+            );
         });
     }
 }

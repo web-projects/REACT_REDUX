@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import * as _ from 'underscore';
 import ActionCreator from '../../actions/actionCreator';
 import EventSinkManager from '../../eventSink/eventSinkManager';
@@ -7,7 +7,7 @@ import EventArgs from '../../eventSink/eventArgs';
 import ResponsiveDataViewerComponent from '../../components/tables/responsiveDataViewerComponent.jsx';
 import DeviceAppDataDetailsWindow from '../../components/popupWindow/deviceAppDataDetailsWindow.jsx';
 
-export default class DeviceDataViewerPageItem extends React.Component {
+export default class DeviceDataViewerPageItem extends Component {
     constructor(props) {
         super(props);
         this.dispatchPtr = null;
@@ -17,6 +17,10 @@ export default class DeviceDataViewerPageItem extends React.Component {
     componentDidMount() {
         this.dispatchPtr = this.props.dispatch;
         this.actionCreator.getDeviceData('', null)(this.dispatchPtr);
+    }
+
+    onXrefLinkShow(id) {
+      global.eventSinkManager.postMessage(new EventArgs(EventCodes.EVT_DEVICE_DATA_DISPLAY_APP_DETAILS, id));
     }
 
     render() {
@@ -75,19 +79,16 @@ export default class DeviceDataViewerPageItem extends React.Component {
 
         return (
           <section id="data-viewer-section">
-               <ResponsiveDataViewerComponent
-                    fetching={this.props.fetching}
-                    isLoaded={this.props.isLoaded}
-                    data={this.props.data}
-                    headerColumns={headerColumns}
-                    defaultSortField="creationDate"
-                    fieldTypes={fieldTypesMap} />
-                <DeviceAppDataDetailsWindow title="Extended Details" />
+            <ResponsiveDataViewerComponent
+              fetching={this.props.fetching}
+              isLoaded={this.props.isLoaded}
+              data={this.props.data}
+              headerColumns={headerColumns}
+              defaultSortField="creationDate"
+              fieldTypes={fieldTypesMap}
+            />
+            <DeviceAppDataDetailsWindow title="Extended Details" />
           </section>
         );
-    }
-
-    onXrefLinkShow(id) {
-         global.eventSinkManager.postMessage(new EventArgs(EventCodes.EVT_DEVICE_DATA_DISPLAY_APP_DETAILS, id));
     }
 }

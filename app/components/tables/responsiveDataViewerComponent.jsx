@@ -56,9 +56,9 @@ export default class ResponsiveDataViewerComponent extends ResponsiveBaseCompone
         const tableHeadContents = [];
         for (let ndx = 0; ndx < columnHeaders.length; ++ndx) {
             tableHeadContents.push((
-                <th className="th-sm">
-                    {columnHeaders[ndx].name}
-                </th>
+              <th className="th-sm">
+                {columnHeaders[ndx].name}
+              </th>
             ));
         }
 
@@ -83,31 +83,30 @@ export default class ResponsiveDataViewerComponent extends ResponsiveBaseCompone
                     }
                 }
                 columnDataArray.push((
-                    <td>
-                        {columnValue}
-                    </td>
+                  <td>
+                    {columnValue}
+                  </td>
                 ));
             }
 
             tableRowContents.push((
-                <tr>
-                    {columnDataArray}
-                </tr>
+              <tr>
+                {columnDataArray}
+              </tr>
             ));
         }
 
         return (
-            <table id={this.tableName} className="table table-striped table-bordered table-sm"
-                cellSpacing={0} width="100%">
-                    <thead>
-                        <tr>
-                            {tableHeadContents}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableRowContents}
-                    </tbody>
-            </table>
+          <table id={this.tableName} className="table table-striped table-bordered table-sm" cellSpacing={0} width="100%">
+            <thead>
+              <tr>
+                {tableHeadContents}
+              </tr>
+            </thead>
+            <tbody>
+              {tableRowContents}
+            </tbody>
+          </table>
         );
     }
 
