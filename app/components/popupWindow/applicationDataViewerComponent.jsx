@@ -41,10 +41,7 @@ export default class ApplicationDataViewerComponent extends React.Component {
       return headers;
   }
 
-  render() {
-    const columnHeaders = this.createHeaderColumns();
-
-    // Build the rendered output of the table headers.
+  createTableHeadContents(columnHeaders) {
     const tableHeadContents = [];
     for (let ndx = 0; ndx < columnHeaders.length; ++ndx) {
         tableHeadContents.push((
@@ -54,7 +51,10 @@ export default class ApplicationDataViewerComponent extends React.Component {
         ));
     }
 
-    // Build the rendered output of the table rows.
+    return tableHeadContents;
+  }
+
+  createTableRowContents(columnHeaders) {
     const tableRowContents = [];
     const columnDataArray = [];
     for (let i = 0; i < columnHeaders.length; ++i) {
@@ -75,6 +75,18 @@ export default class ApplicationDataViewerComponent extends React.Component {
         {columnDataArray}
       </tr>
     ));
+
+    return tableRowContents;
+  }
+
+  render() {
+    const columnHeaders = this.createHeaderColumns();
+
+    // Build the rendered output of the table headers.
+    const tableHeadContents = this.createTableHeadContents(columnHeaders);
+
+    // Build the rendered output of the table rows.
+    const tableRowContents = this.createTableRowContents(columnHeaders);
 
     return (
       <table id={this.tableName} className="table table-striped table-bordered table-sm" cellSpacing={0} width="100%">

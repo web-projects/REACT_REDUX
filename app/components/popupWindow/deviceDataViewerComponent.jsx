@@ -55,11 +55,11 @@ export default class DeviceDataViewerComponent extends React.Component {
     return tableHeadContents;
   }
 
-  createTableRowContents() {
-    const columnHeaders = [];
+  createTableRowContents(columnHeaders) {
     const tableRowContents = [];
     const columnDataArray = [];
 
+    // ToDo: different layout
     /*
     for (let i = 0; i < columnHeaders.length; ++i) {
         let columnValue = 'missing key';
@@ -81,36 +81,37 @@ export default class DeviceDataViewerComponent extends React.Component {
     ));
     */
 
+    const workingRows = [];
     const singleRowObject = this.props.data.deviceData;
-    Object.keys(singleRowObject).forEach((item) => {
-        columnHeaders.push({
-            key: item,
-            value: this.props.data.deviceData[item],
+    Object.keys(singleRowObject).forEach((key) => {
+      workingRows.push({
+            name: key,
+            value: this.props.data.deviceData[key],
         });
     });
-    // console.log(columnHeaders);
+    // console.log(workingRows);
 
-    for (let i = 0; i < columnHeaders.length; ++i) {
-      let columnValue = columnHeaders[i].key;
-      columnDataArray.push((
-        <td>
-          {columnValue}
-        </td>
-      ));
-      columnValue = columnHeaders[i].value;
-      columnDataArray.push((
-        <td>
-          {columnValue}
-        </td>
-      ));
+    for (let i = 0; i < workingRows.length; ++i) {
+        if (workingRows[i].value.toString().length > 0) {
+          columnDataArray.push((
+            <td>
+              {workingRows[i].name}
+            </td>
+          ));
+          columnDataArray.push((
+            <td>
+              {workingRows[i].value.toString()}
+            </td>
+          ));
+        }
     }
     // console.log(columnDataArray);
 
-    for (let j = 0; j < columnDataArray.length; j += 2) {
+    for (let i = 0; i < columnDataArray.length; i += 2) {
       tableRowContents.push((
         <tr>
-          {columnDataArray[j]}
-          {columnDataArray[j + 1]}
+          {columnDataArray[i]}
+          {columnDataArray[i + 1]}
         </tr>
       ));
     }
@@ -127,7 +128,7 @@ export default class DeviceDataViewerComponent extends React.Component {
     const tableHeadContents = this.createTableHeadContents(columnHeaders);
 
     // Build the rendered output of the table rows.
-    const tableRowContents = this.createTableRowContents();
+    const tableRowContents = this.createTableRowContents(columnHeaders);
 
     return (
       <table id={this.tableName} className="table table-striped table-bordered table-sm" cellSpacing={0} width="100%">

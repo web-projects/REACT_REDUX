@@ -194,10 +194,10 @@ export default class DeviceAppDataDetailsWindow extends EventSinkListenerCompone
         key: 'VosVault',
       });
       */
-
+      // ToDo: different layout
       headerColumns.push({
-        name: 'Settings',
-        key: 'Settings',
+        name: 'Setting',
+        key: 'Setting',
       });
       headerColumns.push({
         name: 'Value',
